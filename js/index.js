@@ -1,3 +1,4 @@
+"user strict"
 /*function comprobar() {
     var numA;
     var numB;
@@ -51,8 +52,106 @@ function generar() {
     res.innerHTML = a+b+c;
 }
 
-function automataFinito() {
+var alfabeto = [];
+var estados = [0,1,2];
+var estadoInicial = [0];
+var estadoFinal = [1,2];
+document.getElementById("block").style.visibility = "visible";
+
+function ingresoAlfabeto() {
+    let alf1, alf2;
+
+    alf1 = document.getElementById('var1').value;
+    alf2 = document.getElementById('var2').value;
+    if(alf1 != "" && alf2 != "") {
+        alfabeto.push(alf1, alf2);
+        console.log(alfabeto);
+        document.getElementById("block").style.visibility = "hidden";
+        document.getElementById("form-start").style.backgroundColor = "#42F992"
+        document.getElementById("main2").style.backgroundColor = "#62E3FA"
+    } else {
+        alert("Llene los campos!");
+    }
+
+}
+
+function validacionPalabra() {
     var palabra = document.getElementById('palabra').value;
+    var actual = estadoInicial[0];
+    var contador = 0;
+    var contadorVar1, contadorVar2;
+    var fin = false;
+
+    palabra = palabra.split(",");
+    console.log(palabra)
+
+    while(fin == false) {
+        
+        if(actual == 2) {
+            if(palabra[contador] == alfabeto[0]) {
+                actual = 1;
+                contadorVar1++;
+            } if(palabra[contador] == alfabeto[1]) {
+                actual = 2;
+                contadorVar2++;
+            } else {
+                actual = 0;
+                fin = true;
+            }
+            contador++;
+        }
+
+        if(actual == 1) {
+            if(palabra[contador] == alfabeto[0]) {
+                actual = 1;
+                contadorVar1++;
+            } else if(palabra[contador] == alfabeto[1]) {
+                actual = 2;
+                contadorVar2++;
+            } else {
+                actual = 0;
+                fin = true
+            }
+            contador++;
+        }
+
+        if(actual == 0) {
+            if(palabra[contador] == alfabeto[0]) {
+                actual = 1;
+                contadorVar1++;
+            } else {
+                actual = 0;
+                fin = true;
+            }
+            contador++;
+        }
+        if (contador > palabra.length - 1) {
+            fin = true;
+        }
+
+    }
+
+    if(actual == estadoFinal[0] && contadorVar2 >= 1) {
+        console.log("La cadena es correcta!");
+        alert("Lacadena es correcta")
+        //console.log("las a: ", as , "las b: ", bs, "las c: ", cs);
+    } else if (actual == estadoFinal[1]) {
+        console.log("La cadena es correcta!");
+        alert("Lacadena es correcta")
+
+    } else {
+        console.log("La cadena no es valida!");
+        alert("Lacadena es incorrecta")
+    }
+    alfabeto = [];
+    document.getElementById("block").style.visibility = "visible";
+    document.getElementById("form-start").style.backgroundColor = "#62E3FA"
+    document.getElementById("main2").style.backgroundColor = "#FA6262"
+}
+
+
+
+function automataFinito() {
     var inicial = 0;
     var final = 3;
     var actual = inicial;
@@ -132,37 +231,75 @@ function automataFinito() {
 
 }
 
-// (1) S-> WTU (2) W -> Wa (3) T -> bT (4) U -> cUc (5) W -> a (6) T -> b (7) U -> c (8) U -> cU
+function juego() {
+    var alf1, alf2;
 
-/*
-abccc
-(1)(5)(6)(4)(7)
-*/  
+    var estados = [0,1,2];
+    var alfabeto = [];
 
+    var estadoInicial = [];
+    var estadoFinal = [];
 
-/*
-aaabbcccccccc
-(1)(2)(5)(3)(6)(4)(4)(8)(8)(8)(7) 
-cUc
-ccUcc
-cccUcc
-ccccUcc
-cccccUcc
-cccccccc
-*/
+    alf1 = document.getElementById('var1').value;
+    alf2 = document.getElementById('var2').value;
 
-/*
-abbbbbcccccc
-(1)(5)(3)(3)(3)(3)(6)(4)(4)(8)(7)
-bT
-bbT
-bbbT
-bbbbT
+    alfabeto.push(alf1, alf2);
 
-cUc
-ccUcc
-cccUcc
-cccccc
-
-
-*/
+    while(fin == false) {
+        if(actual == 0) {
+            if(palabra[contador] == "a") {
+                actual = 1;
+                as++;
+            } if(palabra[contador] == "b") {
+                actual = 0;
+                bs++;
+            } if(palabra[contador] == "c") {
+                actual = 0;
+                cs++;
+            }
+            contador++;
+        }
+        if(actual == 1) {
+            if(palabra[contador] == "a") {
+                actual = 1;
+                as++;
+            } if(palabra[contador] == "b") {
+                actual = 2;
+                bs++;
+            } if(palabra[contador] == "c") {
+                actual = 0;
+                cs++;
+            }
+            contador++;
+        }
+        if(actual == 2) {
+            if(palabra[contador] == "a") {
+                actual = 0;
+                as++;
+            } if(palabra[contador] == "b") {
+                actual = 2;
+                bs++;
+            } if(palabra[contador] == "c") {
+                actual = 3;
+                cs++;
+            }
+            contador++;
+        }
+        if(actual == 3) {
+            if(palabra[contador] == "a") {
+                actual = 0;
+                as++;
+            } if(palabra[contador] == "b") {
+                actual = 0;
+                bs++;
+            } if(palabra[contador] == "c") {
+                actual = 3;
+                cs++;
+            }
+            contador++;
+        }
+        if (contador > palabra.length - 1) {
+            fin = true;
+        }
+    }
+}

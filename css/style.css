@@ -2,3 +2,78 @@
     padding: 0px;
     margin: 0px;
 }
+.restric {
+    padding: 3rem;
+}
+
+.ingreso {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-start {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    background-color: #62E3FA;
+    width: 50%;
+    height: 10rem;
+}
+.form-start > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+}
+.form-start > div > label{
+    padding-right: 5px;
+}
+
+
+.form-word {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.form-word > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+}
+.form-word > div > label{
+    padding-right: 5px;
+}
+.main2 {
+    background-color: #FA6262;
+    width: 50%;
+    height: 10rem;
+}
+.block {
+    display: flex;
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    margin-top: -7rem;
+}
+.circle {
+    background-color: white;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    margin-top: -2rem;
+    margin-left: -3rem;
+
+}
+.btn {
+    border-color: black !important;
+    margin-left: 2rem;
+}
+.input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 0px;
+    margin-left: 7px;
+}
